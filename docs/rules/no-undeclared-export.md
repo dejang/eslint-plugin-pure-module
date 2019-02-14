@@ -1,36 +1,27 @@
 # Rule to detect exports of objects declared outside of the scope of current export -- globals (no-undeclared-export)
 
-Please describe the origin of the rule here.
-
+This rule aims to prevent exporting values that have not been defined in the current's module scope. 
+A value or property of object that has been defined on the global scope is not purifiable, therefor the module exporting it is not pure. 
 
 ## Rule Details
 
-This rule aims to...
+Prevent exporting objects that have been defined in different scope (global);
 
 Examples of **incorrect** code for this rule:
 
 ```js
 
-// fill me in
-
+export const a = window;
+export const doc = window.document
+export const querySelector = window.document.querySelector
+export const out = {foo: {win: window}}
+export const out = ["a", [window]]
+export const a = () => {
+    return window;
+}
+export class Foo {
+    constructor() {
+        this.win = window;
+    }
+}
 ```
-
-Examples of **correct** code for this rule:
-
-```js
-
-// fill me in
-
-```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
