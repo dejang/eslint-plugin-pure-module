@@ -2,6 +2,9 @@
 
 An Eslint plugin that will determine if an ES6 module is pure
 
+## Requirements
+ESLint >= v5.10.0
+
 ## Installation
 
 You'll first need to install [ESLint](http://eslint.org):
@@ -47,6 +50,7 @@ Add `pure-module` to the plugins section of your `.eslintrc` configuration file.
 
 * no-export-imported
 * no-undeclared-export
+
 
 
 
