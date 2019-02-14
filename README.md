@@ -13,7 +13,12 @@ $ npm i eslint --save-dev
 Next, install `eslint-plugin-pure-module`:
 
 ```
+// not yet published on NPM
 $ npm install eslint-plugin-pure-module --save-dev
+
+
+// use 
+npm install https://github.com/dejang/eslint-plugin-pure-module/tarball/master --save-dev
 ```
 
 **Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-pure-module` globally.
@@ -24,26 +29,24 @@ Add `pure-module` to the plugins section of your `.eslintrc` configuration file.
 
 ```json
 {
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
     "plugins": [
         "pure-module"
-    ]
-}
-```
-
-
-Then configure the rules you want to use under the rules section.
-
-```json
-{
+    ],
     "rules": {
-        "pure-module/rule-name": 2
+        "pure-module/no-export-imported": 2,
+        "pure-module/no-undeclared-export": 2
     }
 }
 ```
 
 ## Supported Rules
 
-* Fill in provided rules here
+* no-export-imported
+* no-undeclared-export
 
 
 
