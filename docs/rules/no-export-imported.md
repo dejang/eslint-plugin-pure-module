@@ -1,36 +1,45 @@
 # Prevent exporting of imports from other modules. (no-export-imported)
 
-Please describe the origin of the rule here.
+A module acting as proxy exporting the modules it's importing cannot be considered pure.
 
 
 ## Rule Details
 
-This rule aims to...
+This rule aims to prevent mistankingly leaking a module's dependencies to other importing modules.
 
 Examples of **incorrect** code for this rule:
 
 ```js
 
-// fill me in
+import foo from 'foo';
+export {foo};
+
+export {foo} from 'foo';
 
 ```
 
-Examples of **correct** code for this rule:
-
-```js
-
-// fill me in
-
-```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
+The **correct** behavior to avoid triggering this rule is to always avoid the module acting as a proxy for other modules:
 
 ## When Not To Use It
 
-Give a short description of when it would be appropriate to turn off this rule.
+If you're code relies on a folder structure where you have
+```
+   - MyPackage
+        - module1.js
+        - module2.js
+        - index.js
+```
 
-## Further Reading
+And in you're code you are used to do
 
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
+```js
+
+import {module1} from 'MyPackage'
+// or
+import * from 'MyPackage'
+```
+
+This rule is then not for you. It can be argued that such patterns have a use however it is always better to be specific with imports.
+```js
+import module1 from 'Mypackage/module1';
+```
