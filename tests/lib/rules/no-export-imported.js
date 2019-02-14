@@ -26,8 +26,9 @@ var ruleTester = new RuleTester();
 ruleTester.run("no-export-imported", rule, {
 
     valid: [
-
-        // give me some code that won't trigger a warning
+        {code: 'const foo = "bar"; export {foo}'},
+        {code: `export const foo = ['a', 'b', 'c']`},
+        {code: 'export const foo = window'}
     ],
 
     invalid: [
