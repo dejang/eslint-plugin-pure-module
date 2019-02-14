@@ -22,8 +22,8 @@ ruleTester.run("no-undeclared-export", rule, {
 
     valid: [
         {code: 'export const foo = "foo"'},
-        {code: 'export const foo = {foo:"foo"}'},
-        {code: 'export const foo = ["foo"]'},
+        {code: 'export const foo = {foo:"boo"}'},
+        {code: 'export const foo = ["boo"]'},
         {code: 'export const foo = true'},
         {code: 'export const foo = function(a) { return a + 2}'},
         {code: 'export const foo = Symbol.for("test")'},
@@ -82,5 +82,71 @@ ruleTester.run("no-undeclared-export", rule, {
               },
             ],
           },
+          {
+            code: 'export const doc = {foo: {win: window}}',
+            errors: [
+              {
+                message: 'Export must reference a variable declared in module\'s scope',
+              },
+            ],
+          },
+          {
+            code: 'export const doc = [window]',
+            errors: [
+              {
+                message: 'Export must reference a variable declared in module\'s scope',
+              },
+            ],
+          },
+          {
+            code: 'export const doc = ["a", [window]]',
+            errors: [
+              {
+                message: 'Export must reference a variable declared in module\'s scope',
+              },
+            ],
+          },
+          {
+            code: 'export const doc = ["a", [{foo: window}]]',
+            errors: [
+              {
+                message: 'Export must reference a variable declared in module\'s scope',
+              },
+            ],
+          },
+          {
+            code: 'const bad = ["a", [{foo: window}]]; export const doc = bad',
+            errors: [
+              {
+                message: 'Export must reference a variable declared in module\'s scope',
+              },
+            ],
+          },
+          {
+            code: `
+                const bad = ["a", [{foo: window}]]; 
+                const fake = bad;
+                export const doc = fake;
+            `,
+            errors: [
+              {
+                message: 'Export must reference a variable declared in module\'s scope',
+              },
+            ],
+          },
+          {
+            code: `
+                const a = window;
+                const bad = [a, [{foo: 'foo'}]]; 
+                const fake = bad;
+                export const doc = fake;
+            `,
+            errors: [
+              {
+                message: 'Export must reference a variable declared in module\'s scope',
+              },
+            ],
+          },
+          
     ]
 });
