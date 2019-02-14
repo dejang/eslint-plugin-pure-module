@@ -28,7 +28,8 @@ ruleTester.run("no-export-imported", rule, {
     valid: [
         {code: 'const foo = "bar"; export {foo}'},
         {code: `export const foo = ['a', 'b', 'c']`},
-        {code: 'export const foo = window'}
+        {code: 'export const foo = window'},
+        {code: 'export function foo() {}'}
     ],
 
     invalid: [
