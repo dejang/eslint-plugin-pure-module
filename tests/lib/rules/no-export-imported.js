@@ -29,7 +29,8 @@ ruleTester.run("no-export-imported", rule, {
         {code: 'const foo = "bar"; export {foo}'},
         {code: `export const foo = ['a', 'b', 'c']`},
         {code: 'export const foo = window'},
-        {code: 'export function foo() {}'}
+        {code: 'export function foo() {}'},
+        {code: 'export class Foo {}'}
     ],
 
     invalid: [
@@ -80,6 +81,6 @@ ruleTester.run("no-export-imported", rule, {
                 message: 'Cannot allow export all',
               },
             ],
-          },
+          }
     ]
 });
