@@ -41,7 +41,8 @@ Add `pure-module` to the plugins section of your `.eslintrc` configuration file.
     ],
     "rules": {
         "pure-module/no-export-imported": 2,
-        "pure-module/no-undeclared-export": 2
+        "pure-module/no-undeclared-export": 2,
+        "pure-module/no-closure-function": 2
     }
 }
 ```
