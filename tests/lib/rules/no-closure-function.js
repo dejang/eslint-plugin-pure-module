@@ -46,21 +46,5 @@ ruleTester.run("no-closure-function", rule, {
                 },
             ],
         },
-        {
-            code: "export const foo = this;",
-            errors: [
-                {
-                    message: 'Cannot export a closure over module variables',
-                },
-            ],
-        },
-        {
-            code: "export const foo = () => this;",
-            errors: [
-                {
-                    message: 'Cannot export a closure over module variables',
-                },
-            ],
-        },
     ]
 });
